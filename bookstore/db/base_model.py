@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class BaseModel(models.Model):
     '''模型抽象基类'''
     is_delete = models.BooleanField(default=False, verbose_name='删除标记')

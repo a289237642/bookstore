@@ -2,11 +2,13 @@ from django.db import models
 from db.base_model import BaseModel
 from hashlib import sha1
 
+
 def get_hash(str):
     '''取一个字符串的hash值'''
     sh = sha1()
     sh.update(str.encode('utf8'))
     return sh.hexdigest()
+
 
 # Create your models here.
 class PassportManager(models.Manager):
@@ -32,7 +34,8 @@ class PassportManager(models.Manager):
         except self.model.DoesNotExist:
             passport = None
         return passport
-        
+
+
 # Create your models here.
 class Passport(BaseModel):
     '''用户模型类'''
@@ -46,8 +49,10 @@ class Passport(BaseModel):
     class Meta:
         db_table = 's_user_account'
 
+
 class AddressManager(models.Manager):
     '''地址模型管理器类'''
+
     def get_default_address(self, passport_id):
         '''查询指定用户的默认收货地址'''
         try:

@@ -8,8 +8,10 @@ import os
 
 fs = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'static'))
 
+
 class BooksManager(models.Manager):
     '''商品模型管理器类'''
+
     # sort='new' 按照创建时间进行排序
     # sort='hot' 按照商品销量进行排序
     # sort='price' 按照商品的价格进行排序
@@ -19,11 +21,11 @@ class BooksManager(models.Manager):
         if sort == 'new':
             order_by = ('-create_time',)
         elif sort == 'hot':
-            order_by = ('-sales', )
+            order_by = ('-sales',)
         elif sort == 'price':
-            order_by = ('price', )
+            order_by = ('price',)
         else:
-            order_by = ('-pk', ) # 按照primary key降序排列。
+            order_by = ('-pk',)  # 按照primary key降序排列。
 
         # 查询数据
         books_li = self.filter(type_id=type_id).order_by(*order_by)
@@ -42,11 +44,12 @@ class BooksManager(models.Manager):
             books = None
         return books
 
+
 # Create your models here.
 class Books(BaseModel):
     '''商品模型类'''
-    books_type_choices = ((k, v) for k,v in BOOKS_TYPE.items())
-    status_choices = ((k, v) for k,v in STATUS_CHOICE.items())
+    books_type_choices = ((k, v) for k, v in BOOKS_TYPE.items())
+    status_choices = ((k, v) for k, v in STATUS_CHOICE.items())
     type_id = models.SmallIntegerField(default=PYTHON, choices=books_type_choices, verbose_name='商品种类')
     name = models.CharField(max_length=20, verbose_name='商品名称')
     desc = models.CharField(max_length=128, verbose_name='商品简介')
