@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-#　将项目的目录设置为根目录
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# 　将项目的目录设置为根目录
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -30,30 +30,29 @@ DEBUG = True
 # 允许访问的host
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 # 安装的app
 INSTALLED_APPS = (
-    'django.contrib.admin', # django自带的后台管理系统
-    'django.contrib.auth', # 鉴权
-    'django.contrib.contenttypes', # 包装response，比如text/html，image/gif
-    'django.contrib.sessions', # 处理session和cookie
+    'django.contrib.admin',  # django自带的后台管理系统
+    'django.contrib.auth',  # 鉴权
+    'django.contrib.contenttypes',  # 包装response，比如text/html，image/gif
+    'django.contrib.sessions',  # 处理session和cookie
     'django.contrib.messages',  # 日志系统
     'django.contrib.staticfiles',  # 静态文件处理器
-    'users', # 用户模块
-    'books', # 商品模块
-    'tinymce', # 富文本编辑器
-    'order', # 订单信息模块
-    'comments', # 评论模块
-    'haystack', # 全文检索框架
-    'users.templatetags.filters', # 过滤器功能
+    'users',  # 用户模块
+    'books',  # 商品模块
+    'tinymce',  # 富文本编辑器
+    'order',  # 订单信息模块
+    'comments',  # 评论模块
+    'haystack',  # 全文检索框架
+    'users.templatetags.filters',  # 过滤器功能
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware', # 处理session的中间件
-    'django.middleware.common.CommonMiddleware', # 基本功能
-    'django.middleware.csrf.CsrfViewMiddleware', # 跨域
-    'django.contrib.auth.middleware.AuthenticationMiddleware', # 鉴权
+    'django.contrib.sessions.middleware.SessionMiddleware',  # 处理session的中间件
+    'django.middleware.common.CommonMiddleware',  # 基本功能
+    'django.middleware.csrf.CsrfViewMiddleware',  # 跨域
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # 鉴权
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -64,12 +63,12 @@ MIDDLEWARE_CLASSES = (
     'utils.middleware.BlockedIpMiddleware',
 )
 
-ROOT_URLCONF = 'bookstore.urls' # 主应用的url路由
+ROOT_URLCONF = 'bookstore.urls'  # 主应用的url路由
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')], # 这里别忘记配置！
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 这里别忘记配置！
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,28 +83,26 @@ TEMPLATES = [
 # uwsgi接收到请求以后，解析成django可以处理的格式，部署的时候使用
 WSGI_APPLICATION = 'bookstore.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # 配置为mysql
-        'NAME': 'bookstore', # 数据库的名字
-        'USER': 'root', # 用户名
-        'PASSWORD': '', # 密码
+        'ENGINE': 'django.db.backends.mysql',  # 配置为mysql
+        'NAME': 'bookstore',  # 数据库的名字
+        'USER': 'root',  # 用户名
+        'PASSWORD': 'mysql',  # 密码
         'HOST': '127.0.0.1',  # host
         'PORT': 3306,  # 端口
     }
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -113,14 +110,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/' # 静态文件的路径
+STATIC_URL = '/static/'  # 静态文件的路径
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
-] # 调试时使用的静态文件目录
+]  # 调试时使用的静态文件目录
 STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
 # 上传文件指定的路径，在生产环境中会上传到CDN，七牛云，又拍云，阿里云，也有可能将静态文件放在nginx的服务器上．
 MEDIA_ROOT = os.path.join(BASE_DIR, "static")
@@ -148,7 +144,7 @@ TINYMCE_DEFAULT_CONFIG = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2", # 第二个数据库
+        "LOCATION": "redis://127.0.0.1:6379/2",  # 第二个数据库
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PASSWORD": ""
@@ -174,9 +170,9 @@ HAYSTACK_CONNECTIONS = {
 # 当添加、修改、删除数据时，自动生成索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 6 # 指定搜索结果每页的条数
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 6  # 指定搜索结果每页的条数
 
-ALIPAY_URL='https://openapi.alipaydev.com/gateway.do'
+ALIPAY_URL = 'https://openapi.alipaydev.com/gateway.do'
 
 LOGGING = {
     'version': 1,
